@@ -716,7 +716,7 @@ h1 {
     }
 
     .logo {
-        max-width: 120px;
+        max-width: 180px; /* 144pxから150%に拡大 */
         margin: 5px auto;
     }
 
@@ -771,7 +771,7 @@ h1 {
     }
 
     .logo {
-        max-width: 100px;
+        max-width: 200px; /* 150pxから200pxに拡大 */
         margin: 3px auto;
     }
 
