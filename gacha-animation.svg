@@ -1,0 +1,428 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 -50 500 500" width="500" height="500">
+  <style>
+    /* アニメーションの定義 */
+    @keyframes initialFlash {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      20% { opacity: 0; }
+      30% { opacity: 1; }
+      40% { opacity: 0; }
+      50% { opacity: 1; }
+      60% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.7; }
+    }
+    
+    @keyframes fallTooth {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(450px) rotate(360deg); opacity: 0; }
+    }
+    
+    @keyframes fallItem {
+      0% { transform: translateY(-50px) rotate(0deg) scale(0.8); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(450px) rotate(360deg) scale(0.8); opacity: 0; }
+    }
+    
+    @keyframes spinAndGrow {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      60% { transform: scale(1.2) rotate(720deg); opacity: 1; }
+      100% { transform: scale(1) rotate(1080deg); opacity: 1; }
+    }
+    
+    @keyframes moveGadget {
+      0% { transform: translateX(-100px); opacity: 0; }
+      20% { transform: translateX(0); opacity: 1; }
+      80% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(100px); opacity: 0; }
+    }
+    
+    @keyframes lightning {
+      0% { opacity: 0; stroke: #FFFF00; }
+      25% { opacity: 1; stroke: #FFFFFF; }
+      50% { opacity: 0; stroke: #FFFF00; }
+      75% { opacity: 1; stroke: #FFFFFF; }
+      100% { opacity: 0; stroke: #FFFF00; }
+    }
+    
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+      100% { opacity: 0; transform: scale(0.8) rotate(360deg); }
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    @keyframes revealText {
+      0% { opacity: 0; transform: scale(0.5); }
+      10% { opacity: 1; transform: scale(1.2); }
+      20% { opacity: 1; transform: scale(1); }
+      80% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.5); }
+    }
+    
+    @keyframes backgroundPulse {
+      0% { opacity: 0.1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 0.1; }
+    }
+    
+    @keyframes circleRadiate {
+      0% { r: 0; opacity: 1; }
+      100% { r: 200; opacity: 0; stroke-width: 0; }
+    }
+    
+    @keyframes circleAroundCW {
+      0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+    }
+    
+    @keyframes circleAroundCCW {
+      0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+      100% { transform: rotate(-360deg) translateX(120px) rotate(360deg); }
+    }
+    
+    @keyframes circleAroundCW2 {
+      0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+    }
+    
+    @keyframes circleAroundCCW2 {
+      0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+      100% { transform: rotate(-360deg) translateX(150px) rotate(360deg); }
+    }
+    
+    /* スタイルの定義 */
+    .background { fill: #FFFBE6; }
+    .machine { fill: #FFDD00; stroke: #000000; stroke-width: 4; }
+    .machine-window { fill: #FFFFFF; stroke: #000000; stroke-width: 3; }
+    .knob { fill: #FFAA00; stroke: #000000; stroke-width: 2; }
+    .tooth { fill: white; stroke: #000000; stroke-width: 1; }
+    .sparkle { fill: #FFFFFF; }
+    .character-head { fill: white; stroke: #000000; stroke-width: 4; }
+    .character-nose { fill: #FFDD00; stroke: #000000; stroke-width: 2; }
+    .character-eye { fill: #000000; }
+    .character-mouth { fill: none; stroke: #000000; stroke-width: 2; }
+    .character-infinity { fill: none; stroke: #000000; stroke-width: 4; }
+    .character-spring { fill: none; stroke: #000000; stroke-width: 4; }
+    .toothbrush { fill: #FFDD00; stroke: #000000; stroke-width: 2; }
+    .toothbrush-bristles { fill: white; stroke: #000000; stroke-width: 1; }
+    .dental-mirror { fill: #DDDDDD; stroke: #000000; stroke-width: 2; }
+    .dental-mirror-handle { fill: #FFDD00; stroke: #000000; stroke-width: 2; }
+    .message-box { fill: #FFFFFF; stroke: #000000; stroke-width: 3; rx: 15; ry: 15; }
+    .message-text { fill: #000000; font-size: 24px; font-weight: bold; text-anchor: middle; font-family: Arial, sans-serif; }
+    .flash { fill: white; }
+  </style>
+
+  <!-- 背景 - 円全体が見えるように調整 -->
+  <circle cx="300" cy="200" r="250" fill="#FFFBE6" />
+  
+  <!-- 背景輝きエフェクト - 円の輪郭 -->
+  <circle cx="300" cy="200" r="250" fill="none" stroke="#FFEE99" stroke-width="2" />
+  
+  <!-- 円形マスクを適用して円の外側を切り取る -->
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="300" cy="200" r="250" />
+    </clipPath>
+  </defs>
+  
+  <!-- すべての要素をグループ化してクリッピングマスクを適用 -->
+  <g clip-path="url(#circleClip)">
+  
+  <!-- ガチャマシン (全体を通して表示) - 左右の余分なスペースを削除 -->
+  <g style="animation: fadeIn 0.5s ease-out 0.8s forwards; opacity: 0;">
+    <rect class="machine" x="175" y="50" width="250" height="300" rx="30" ry="30" />
+    <circle class="machine-window" cx="300" cy="150" r="80" />
+    
+    <!-- ガチャノブ -->
+    <g transform="translate(300, 300)">
+      <circle class="knob" r="40" />
+      <circle fill="#FFFFFF" r="20" />
+      <g style="animation: rotate 2s linear infinite 1s;">
+        <line x1="0" y1="-40" x2="0" y2="-20" stroke="#CC0000" stroke-width="4" />
+      </g>
+    </g>
+  </g>
+  
+  <!-- 中盤の演出 (1-3秒) - 歯科器具が動く -->
+  <g style="animation: moveGadget 2s ease-in-out 1s both;">
+    <!-- 歯ブラシ -->
+    <g transform="translate(180, 150) rotate(-30)">
+      <rect class="toothbrush" x="-10" y="-60" width="20" height="120" rx="5" ry="5" />
+      <rect class="toothbrush-bristles" x="-15" y="-70" width="30" height="20" rx="3" ry="3" />
+    </g>
+    
+    <!-- 歯科ミラー -->
+    <g transform="translate(420, 150) rotate(30)">
+      <circle class="dental-mirror" cx="0" cy="-50" r="25" />
+      <rect class="dental-mirror-handle" x="-7" y="-30" width="14" height="100" rx="5" ry="5" />
+    </g>
+  </g>
+  
+  <!-- 雷エフェクト -->
+  <g style="animation: lightning 0.8s ease-in-out 1.5s both;">
+    <path d="M150,50 L170,100 L150,110 L180,180" stroke="#000000" stroke-width="6" stroke-linecap="round" />
+    <path d="M450,50 L430,100 L450,110 L420,180" stroke="#000000" stroke-width="6" stroke-linecap="round" />
+  </g>
+  
+  <!-- 歯が降る演出 - よりリアルな歯のデザイン -->
+  <g>
+    <!-- 前歯デザイン -->
+    <g transform="translate(200, -20)" style="animation: fallTooth 3s linear 1.2s infinite;">
+      <path fill="white" stroke="#000000" stroke-width="2" d="M0,0 C-15,0 -15,20 -10,35 C-5,45 0,50 0,50 C0,50 5,45 10,35 C15,20 15,0 0,0 Z" />
+      <path fill="none" stroke="#DDDDDD" stroke-width="1" d="M-5,10 L5,10 M-8,20 L8,20" />
+    </g>
+    
+    <g transform="translate(300, -20)" style="animation: fallTooth 3s linear 1.5s infinite;">
+      <path fill="white" stroke="#000000" stroke-width="2" d="M0,0 C-15,0 -15,20 -10,35 C-5,45 0,50 0,50 C0,50 5,45 10,35 C15,20 15,0 0,0 Z" />
+      <path fill="none" stroke="#DDDDDD" stroke-width="1" d="M-5,10 L5,10 M-8,20 L8,20" />
+    </g>
+    
+    <!-- 臼歯デザイン -->
+    <g transform="translate(250, -20)" style="animation: fallTooth 3s linear 1.8s infinite;">
+      <path fill="white" stroke="#000000" stroke-width="2" d="M0,0 C-15,0 -20,5 -20,15 C-20,35 -15,45 -10,50 C-5,55 5,55 10,50 C15,45 20,35 20,15 C20,5 15,0 0,0 Z" />
+      <path fill="none" stroke="#DDDDDD" stroke-width="1" d="M-10,15 C-5,20 5,20 10,15 M-10,25 C-5,30 5,30 10,25" />
+    </g>
+    
+    <g transform="translate(350, -20)" style="animation: fallTooth 3s linear 2.1s infinite;">
+      <path fill="white" stroke="#000000" stroke-width="2" d="M0,0 C-15,0 -20,5 -20,15 C-20,35 -15,45 -10,50 C-5,55 5,55 10,50 C15,45 20,35 20,15 C20,5 15,0 0,0 Z" />
+      <path fill="none" stroke="#DDDDDD" stroke-width="1" d="M-10,15 C-5,20 5,20 10,15 M-10,25 C-5,30 5,30 10,25" />
+    </g>
+    
+    <g transform="translate(400, -20)" style="animation: fallTooth 3s linear 2.4s infinite;">
+      <path fill="white" stroke="#000000" stroke-width="2" d="M0,0 C-15,0 -20,5 -20,15 C-20,35 -15,45 -10,50 C-5,55 5,55 10,50 C15,45 20,35 20,15 C20,5 15,0 0,0 Z" />
+      <path fill="none" stroke="#DDDDDD" stroke-width="1" d="M-10,15 C-5,20 5,20 10,15 M-10,25 C-5,30 5,30 10,25" />
+    </g>
+    
+    <!-- 歯ブラシが降る演出 - より詳細なデザイン -->
+    <g transform="translate(225, -30)" style="animation: fallItem 4s linear 1s infinite;">
+      <rect fill="#FFDD00" stroke="#000000" stroke-width="2" x="-8" y="-40" width="16" height="70" rx="5" ry="5" />
+      <rect fill="white" stroke="#000000" stroke-width="1" x="-12" y="-50" width="24" height="15" rx="3" ry="3" />
+      <!-- ブラシの毛 -->
+      <line x1="-10" y1="-48" x2="-10" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="-6" y1="-48" x2="-6" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="-2" y1="-48" x2="-2" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="2" y1="-48" x2="2" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="6" y1="-48" x2="6" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="10" y1="-48" x2="10" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+    </g>
+    
+    <g transform="translate(375, -30)" style="animation: fallItem 4s linear 2.5s infinite;">
+      <rect fill="#FFAA00" stroke="#000000" stroke-width="2" x="-8" y="-40" width="16" height="70" rx="5" ry="5" />
+      <rect fill="white" stroke="#000000" stroke-width="1" x="-12" y="-50" width="24" height="15" rx="3" ry="3" />
+      <!-- ブラシの毛 -->
+      <line x1="-10" y1="-48" x2="-10" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="-6" y1="-48" x2="-6" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="-2" y1="-48" x2="-2" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="2" y1="-48" x2="2" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="6" y1="-48" x2="6" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+      <line x1="10" y1="-48" x2="10" y2="-42" stroke="#FFFFFF" stroke-width="1.5" />
+    </g>
+    
+    <!-- 歯科ミラーが降る演出 - より詳細なデザイン -->
+    <g transform="translate(325, -30)" style="animation: fallItem 4s linear 1.7s infinite;">
+      <circle fill="#DDDDDD" stroke="#000000" stroke-width="2" cx="0" cy="-30" r="20" />
+      <circle fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1" cx="0" cy="-30" r="15" />
+      <rect fill="#FFDD00" stroke="#000000" stroke-width="2" x="-5" y="-15" width="10" height="70" rx="3" ry="3" />
+      <!-- ミラー持ち手の細部 -->
+      <line x1="-5" y1="-10" x2="5" y2="-10" stroke="#DD8800" stroke-width="2" />
+      <line x1="-5" y1="0" x2="5" y2="0" stroke="#DD8800" stroke-width="2" />
+      <line x1="-5" y1="10" x2="5" y2="10" stroke="#DD8800" stroke-width="2" />
+    </g>
+    
+    <g transform="translate(275, -30)" style="animation: fallItem 4s linear 3.2s infinite;">
+      <circle fill="#DDDDDD" stroke="#000000" stroke-width="2" cx="0" cy="-30" r="20" />
+      <circle fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1" cx="0" cy="-30" r="15" />
+      <rect fill="#FFAA00" stroke="#000000" stroke-width="2" x="-5" y="-15" width="10" height="70" rx="3" ry="3" />
+      <!-- ミラー持ち手の細部 -->
+      <line x1="-5" y1="-10" x2="5" y2="-10" stroke="#DD8800" stroke-width="2" />
+      <line x1="-5" y1="0" x2="5" y2="0" stroke="#DD8800" stroke-width="2" />
+      <line x1="-5" y1="10" x2="5" y2="10" stroke="#DD8800" stroke-width="2" />
+    </g>
+  </g>
+  
+  <!-- キラキラエフェクト -->
+  <g>
+    <polygon class="sparkle" points="180,100 185,110 195,110 187,120 190,130 180,125 170,130 173,120 165,110 175,110" style="animation: sparkle 1s ease-in-out 1.5s infinite;" />
+    <polygon class="sparkle" points="420,100 425,110 435,110 427,120 430,130 420,125 410,130 413,120 405,110 415,110" style="animation: sparkle 1s ease-in-out 1.7s infinite;" />
+    <polygon class="sparkle" points="300,70 305,80 315,80 307,90 310,100 300,95 290,100 293,90 285,80 295,80" style="animation: sparkle 1s ease-in-out 1.9s infinite;" />
+    <polygon class="sparkle" points="250,200 255,210 265,210 257,220 260,230 250,225 240,230 243,220 235,210 245,210" style="animation: sparkle 1s ease-in-out 2.1s infinite;" />
+    <polygon class="sparkle" points="350,200 355,210 365,210 357,220 360,230 350,225 340,230 343,220 335,210 345,210" style="animation: sparkle 1s ease-in-out 2.3s infinite;" />
+    
+    <!-- 追加のキラキラエフェクト -->
+    <polygon class="sparkle" points="150,150 155,160 165,160 157,170 160,180 150,175 140,180 143,170 135,160 145,160" style="animation: sparkle 1.2s ease-in-out 1.2s infinite;" />
+    <polygon class="sparkle" points="450,150 455,160 465,160 457,170 460,180 450,175 440,180 443,170 435,160 445,160" style="animation: sparkle 1.2s ease-in-out 1.4s infinite;" />
+    <polygon class="sparkle" points="200,250 205,260 215,260 207,270 210,280 200,275 190,280 193,270 185,260 195,260" style="animation: sparkle 0.8s ease-in-out 1.6s infinite;" />
+    <polygon class="sparkle" points="400,250 405,260 415,260 407,270 410,280 400,275 390,280 393,270 385,260 395,260" style="animation: sparkle 0.8s ease-in-out 1.8s infinite;" />
+  </g>
+  
+  <!-- 中央を回るアイテム（歯科器具） -->
+  <g>
+    <!-- 前歯が回る -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCW 8s linear infinite;">
+        <path fill="white" stroke="#000000" stroke-width="2" d="M0,0 C-10,0 -10,15 -7,25 C-3,32 0,35 0,35 C0,35 3,32 7,25 C10,15 10,0 0,0 Z" />
+        <path fill="none" stroke="#DDDDDD" stroke-width="1" d="M-3,7 L3,7 M-5,15 L5,15" />
+      </g>
+    </g>
+    
+    <!-- 臼歯が回る -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCW 8s linear infinite; animation-delay: 2s;">
+        <path fill="white" stroke="#000000" stroke-width="2" d="M0,0 C-10,0 -15,3 -15,10 C-15,25 -10,32 -7,35 C-3,38 3,38 7,35 C10,32 15,25 15,10 C15,3 10,0 0,0 Z" />
+        <path fill="none" stroke="#DDDDDD" stroke-width="1" d="M-7,10 C-3,15 3,15 7,10 M-7,18 C-3,22 3,22 7,18" />
+      </g>
+    </g>
+    
+    <!-- 詳細な歯ブラシが回る -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCW 8s linear infinite; animation-delay: 4s;">
+        <rect fill="#FFDD00" stroke="#000000" stroke-width="2" x="-6" y="-25" width="12" height="50" rx="3" ry="3" />
+        <rect fill="white" stroke="#000000" stroke-width="1" x="-9" y="-32" width="18" height="10" rx="3" ry="3" />
+        <!-- ブラシの毛 -->
+        <line x1="-7" y1="-30" x2="-7" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+        <line x1="-4" y1="-30" x2="-4" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+        <line x1="-1" y1="-30" x2="-1" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+        <line x1="2" y1="-30" x2="2" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+        <line x1="5" y1="-30" x2="5" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+      </g>
+    </g>
+    
+    <!-- 詳細な歯科ミラーが回る -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCW 8s linear infinite; animation-delay: 6s;">
+        <circle fill="#DDDDDD" stroke="#000000" stroke-width="2" cx="0" cy="-20" r="15" />
+        <circle fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1" cx="0" cy="-20" r="12" />
+        <rect fill="#FFAA00" stroke="#000000" stroke-width="2" x="-4" y="-10" width="8" height="40" rx="2" ry="2" />
+        <!-- ミラー持ち手の細部 -->
+        <line x1="-4" y1="-5" x2="4" y2="-5" stroke="#DD8800" stroke-width="1.5" />
+        <line x1="-4" y1="0" x2="4" y2="0" stroke="#DD8800" stroke-width="1.5" />
+        <line x1="-4" y1="5" x2="4" y2="5" stroke="#DD8800" stroke-width="1.5" />
+      </g>
+    </g>
+    
+    <!-- 外側の円を反対方向に回るアイテム -->
+    <!-- 歯ブラシ（水平方向） -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCCW2 12s linear infinite;">
+        <g transform="rotate(90)">
+          <rect fill="#FFAA00" stroke="#000000" stroke-width="2" x="-6" y="-25" width="12" height="50" rx="3" ry="3" />
+          <rect fill="white" stroke="#000000" stroke-width="1" x="-9" y="-32" width="18" height="10" rx="3" ry="3" />
+          <!-- ブラシの毛 -->
+          <line x1="-7" y1="-30" x2="-7" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+          <line x1="-4" y1="-30" x2="-4" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+          <line x1="-1" y1="-30" x2="-1" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+          <line x1="2" y1="-30" x2="2" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+          <line x1="5" y1="-30" x2="5" y2="-25" stroke="#FFFFFF" stroke-width="1.5" />
+        </g>
+      </g>
+    </g>
+    
+    <!-- 歯科用ピンセット -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCCW2 12s linear infinite; animation-delay: 3s;">
+        <g transform="rotate(45)">
+          <path fill="none" stroke="#DDDDDD" stroke-width="3" d="M0,-30 L-5,-10 L0,-5 L5,-10 L0,-30" />
+          <rect fill="#FFDD00" stroke="#000000" stroke-width="1.5" x="-4" y="-5" width="8" height="35" rx="2" ry="2" />
+          <line x1="-4" y1="5" x2="4" y2="5" stroke="#DD8800" stroke-width="1.5" />
+          <line x1="-4" y1="15" x2="4" y2="15" stroke="#DD8800" stroke-width="1.5" />
+        </g>
+      </g>
+    </g>
+    
+    <!-- 歯科用ドリル -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCCW2 12s linear infinite; animation-delay: 6s;">
+        <rect fill="#DDDDDD" stroke="#000000" stroke-width="1.5" x="-8" y="-30" width="16" height="25" rx="3" ry="3" />
+        <rect fill="#FFAA00" stroke="#000000" stroke-width="1.5" x="-5" y="-10" width="10" height="40" rx="2" ry="2" />
+        <circle fill="#CCCCCC" stroke="#999999" stroke-width="1" cx="0" cy="-25" r="5" />
+        <path fill="none" stroke="#999999" stroke-width="1" d="M-3,-25 L3,-25 M0,-28 L0,-22" />
+      </g>
+    </g>
+    
+    <!-- 歯医者の小さいキャラクター -->
+    <g transform="translate(300, 150)">
+      <g style="animation: circleAroundCCW2 12s linear infinite; animation-delay: 9s;">
+        <circle fill="white" stroke="#000000" stroke-width="1.5" cx="0" cy="-15" r="12" />
+        <circle fill="#000000" cx="-4" cy="-18" r="2" />
+        <circle fill="#000000" cx="4" cy="-18" r="2" />
+        <path fill="none" stroke="#000000" stroke-width="1.5" d="M-5,-10 C-2,-7 2,-7 5,-10" />
+        <rect fill="#FFFFFF" stroke="#000000" stroke-width="1" x="-10" y="-5" width="20" height="25" />
+        <line x1="-10" y1="0" x2="10" y2="0" stroke="#000000" stroke-width="1" />
+      </g>
+    </g>
+  </g>
+  
+  <!-- 追加の雷エフェクト -->
+  <g style="animation: lightning 0.8s ease-in-out 2.2s both;">
+    <path d="M200,30 L220,80 L200,90 L230,160" stroke="#000000" stroke-width="6" stroke-linecap="round" />
+    <path d="M400,30 L380,80 L400,90 L370,160" stroke="#000000" stroke-width="6" stroke-linecap="round" />
+  </g>
+  
+  <g style="animation: lightning 0.8s ease-in-out 2.9s both;">
+    <path d="M120,30 L140,80 L120,90 L150,160" stroke="#000000" stroke-width="6" stroke-linecap="round" />
+    <path d="M480,30 L460,80 L480,90 L450,160" stroke="#000000" stroke-width="6" stroke-linecap="round" />
+  </g>
+  
+  <!-- 中央の白い窓の中でキャラクターを動かす -->
+  <g transform="translate(300, 150)">
+    <g style="animation: bounce 1s ease-in-out 0s infinite;">
+      <!-- 頭部 -->
+      <circle cx="0" cy="0" r="40" fill="white" stroke="#000000" stroke-width="8" />
+      
+      <!-- 目 -->
+      <circle cx="-15" cy="-10" r="5" fill="#000000" />
+      <circle cx="15" cy="-10" r="5" fill="#000000" />
+      
+      <!-- 鼻 -->
+      <circle cx="0" cy="5" r="15" fill="#FFDD00" stroke="#000000" stroke-width="2" />
+      
+      <!-- 口 -->
+      <path d="M-15,22 Q0,30 15,22" fill="none" stroke="#000000" stroke-width="3" />
+      
+      <!-- アンテナ -->
+      <line x1="-20" y1="-50" x2="-20" y2="-25" stroke="#3A1F00" stroke-width="6" stroke-linecap="round" />
+      <line x1="20" y1="-50" x2="20" y2="-25" stroke="#3A1F00" stroke-width="6" stroke-linecap="round" />
+      
+      <!-- 無限大の記号 -->
+      <path d="M-30,70 C-50,50 -30,40 0,60 C30,80 50,70 30,50 C50,70 30,80 0,60 C-30,40 -50,50 -30,70" fill="none" stroke="#000000" stroke-width="8" transform="scale(0.7)" />
+      
+      <!-- スプリング -->
+      <path d="M0,95 C10,105 -10,115 0,125 C10,135 -10,145 0,155" fill="none" stroke="#000000" stroke-width="6" />
+    </g>
+  </g>
+  
+  </g> <!-- クリッピングされたコンテンツの終了 -->
+</svg>

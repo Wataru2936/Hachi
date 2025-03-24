@@ -1,0 +1,682 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #FFD700; /* はち歯科のメインカラー：黄色 */
+    --accent-color: #000000; /* はち歯科の差し色：黒 */
+    --gold-gradient: linear-gradient(135deg, #FFD700, #FFA500);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background: linear-gradient(135deg, #fff5e6, #fff);
+    color: #333;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    max-height: 100vh;
+    width: min(90vw, calc(100vh - 350px));
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3px;
+    position: relative;
+}
+
+.logo {
+    max-width: 225px;
+    height: auto;
+    margin-bottom: 3px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+header::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: var(--gold-gradient);
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+h1 {
+    color: var(--accent-color);
+    font-size: clamp(1em, 2.5vw, 1.3em);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    letter-spacing: 2px;
+    margin: 3px 0;
+}
+
+.subtitle {
+    font-size: clamp(0.6em, 2vw, 0.8em);
+    color: var(--accent-color);
+    margin-top: 2px;
+    letter-spacing: 1px;
+}
+
+.gacha-container {
+    flex: 1;
+    background: white;
+    border-radius: 20px;
+    padding: clamp(6px, 1vh, 12px);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    text-align: center;
+    border: 2px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1;
+    margin: 3px auto;
+}
+
+.gacha-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gold-gradient);
+}
+
+.gacha-display {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #fff, #fff5e6);
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--primary-color);
+    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.2);
+    width: 100%;
+    height: 100%;
+}
+
+.gacha-result {
+    font-size: 1.3em;
+    line-height: 1.6;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+}
+
+/* ガチャボタンのスタイル */
+.gacha-button {
+    width: clamp(80px, 20vw, 150px);
+    height: clamp(80px, 20vw, 150px);
+    margin: 6px auto;
+    background: var(--gold-gradient);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.7em, 1.8vw, 1em);
+    font-weight: bold;
+    color: var(--accent-color);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    animation: buttonPulse 2s ease-in-out infinite;
+    padding: 6px;
+    overflow: hidden;
+}
+
+.bunpachi-image {
+    width: clamp(50px, 12vw, 80px);
+    height: clamp(50px, 12vw, 80px);
+    object-fit: contain;
+    margin-bottom: 2px;
+    transition: transform 0.3s ease;
+}
+
+.gacha-button:not(:disabled):hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.gacha-button:not(:disabled):hover .bunpachi-image {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.gacha-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    animation: none;
+}
+
+.gacha-button:disabled .bunpachi-image {
+    transform: scale(0.95);
+}
+
+.gacha-button.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ガチャアイテムのアニメーション */
+.gacha-items {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gacha-item {
+    position: absolute;
+    font-size: 2.5em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+.gacha-spinning .gacha-item {
+    animation: gachaSpin 0.5s linear infinite;
+}
+
+/* 当たり時の演出 */
+.win-animation {
+    animation: winEffect 1s ease-in-out;
+}
+
+.win-decoration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0) 70%);
+    animation: winGlow 2s ease-in-out infinite;
+}
+
+/* パーティクルのスタイル */
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particleFly 1s ease-out forwards;
+}
+
+@keyframes particleFly {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x, 100px), var(--y, -100px)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* 回転アニメーション用のクラス */
+.spinning {
+    animation: spin 1s ease-in-out;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 装飾的な要素 */
+.gacha-container::after {
+    content: '★';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: var(--primary-color);
+    opacity: 0.5;
+}
+
+/* ガチャの回転アニメーション */
+@keyframes gachaSpin {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+}
+
+.gacha-handle-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    cursor: grab;
+}
+
+.gacha-handle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--gold-gradient);
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease;
+    cursor: grab;
+    user-select: none;
+}
+
+.gacha-handle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 60px;
+    background: var(--accent-color);
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.gacha-handle::after {
+    content: '回す';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.gacha-handle.rotating {
+    cursor: grabbing;
+    animation: none;
+}
+
+.gacha-handle.ready {
+    animation: handlePulse 2s ease-in-out infinite;
+}
+
+@keyframes handlePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ガチャハンドルの回転アニメーション */
+@keyframes handleRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 回転の指示テキスト */
+.handle-instruction {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: var(--accent-color);
+    opacity: 0.8;
+}
+
+/* 画面全体のフラッシュ効果 */
+.screen-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+    animation: flashEffect 0.5s ease-out;
+}
+
+@keyframes flashEffect {
+    0% { opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+
+/* 回転エフェクトの強化 */
+.gacha-spinning .gacha-item {
+    animation: enhancedGachaSpin 0.3s linear infinite;
+}
+
+@keyframes enhancedGachaSpin {
+    0% { 
+        transform: translateY(100%) scale(1);
+        filter: blur(0);
+    }
+    50% {
+        transform: translateY(0) scale(1.2);
+        filter: blur(2px);
+    }
+    100% { 
+        transform: translateY(-100%) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* キラキラエフェクト */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+}
+
+@keyframes sparkleAnimation {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 当たり演出の強化 */
+.win-effect-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.win-circle {
+    position: absolute;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+    animation: circleExpand 1s ease-out forwards;
+}
+
+@keyframes circleExpand {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 200vw;
+        height: 200vw;
+        opacity: 0;
+    }
+}
+
+/* ぶんぱちの演出強化 */
+.bunpachi-image.spinning {
+    animation: bunpachiSpin 1s ease-in-out;
+}
+
+@keyframes bunpachiSpin {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}
+
+/* パーティクルの強化 */
+.enhanced-particle {
+    position: absolute;
+    pointer-events: none;
+    animation: particleBurst 1.5s ease-out forwards;
+    z-index: 100;
+}
+
+@keyframes particleBurst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x, 100px), var(--y, -100px)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* シャイニングエフェクト */
+.shining-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 0%, rgba(255,215,0,0.2) 50%, transparent 100%);
+    animation: shiningAnimation 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes shiningAnimation {
+    0% { transform: translateX(-100%) rotate(-45deg); }
+    50% { transform: translateX(100%) rotate(-45deg); }
+    100% { transform: translateX(-100%) rotate(-45deg); }
+}
+
+/* 結果表示の演出強化 */
+.result-reveal {
+    animation: revealText 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.result-heading {
+    font-size: clamp(1em, 2.5vw, 1.4em);
+    font-weight: bold;
+    margin-bottom: 8px;
+    animation: winEffect 1s ease-in-out;
+}
+
+.lose-message {
+    font-size: clamp(1.4em, 3.5vw, 1.8em) !important;
+    font-weight: bold;
+    margin-bottom: 15px !important;
+}
+
+@keyframes revealText {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ホームボタンのスタイル */
+.home-button {
+    width: clamp(80px, 20vw, 150px);
+    height: clamp(80px, 20vw, 150px);
+    margin: 6px auto;
+    background: var(--gold-gradient);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    bottom: clamp(6px, 1vh, 12px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.home-button svg {
+    width: clamp(40px, 10vw, 60px);
+    height: clamp(40px, 10vw, 60px);
+    fill: var(--accent-color);
+}
+
+.home-button:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+/* ホームボタンのアニメーション */
+@keyframes homeButtonAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+.home-button.visible {
+    opacity: 1;
+    pointer-events: auto;
+    animation: homeButtonAppear 0.5s ease-out forwards;
+}
+
+/* ウェルカムメッセージのスタイル */
+.welcome-message {
+    margin-bottom: 8px;
+    padding: 8px;
+}
+
+.welcome-message p {
+    font-size: clamp(0.8em, 1.8vw, 1em);
+    line-height: 1.3;
+    color: var(--accent-color);
+    margin: 2px 0;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.welcome-message p:nth-child(1),
+.welcome-message p:nth-child(2) {
+    font-size: clamp(1.1em, 2.2vw, 1.4em);
+    font-weight: bold;
+    margin: 4px 0;
+}
+
+.welcome-message p:last-child {
+    font-size: clamp(0.9em, 2vw, 1.1em);
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+.hint {
+    font-size: clamp(0.6em, 1.5vw, 0.7em);
+    color: var(--accent-color);
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+/* GIF表示用のスタイル */
+.gif-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 215, 0, 0.5); /* 黄色で50%の透過度 */
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.gif-container.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.gif-container img {
+    width: min(90vw, calc(100vh - 350px)); /* 中央の四角オブジェクトと同じ幅 */
+    height: min(90vw, calc(100vh - 350px)); /* 中央の四角オブジェクトと同じ高さ */
+    object-fit: contain;
+}
+
+/* 制作者情報のスタイル */
+.creator-info {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: clamp(0.6em, 1.2vw, 0.7em);
+    color: var(--accent-color);
+    opacity: 0.7;
+    text-align: right;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    letter-spacing: 0.05em;
+    font-style: italic;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+    padding: 6px 10px;
+    border-radius: 12px;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.3s ease;
+    line-height: 1.4;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.creator-info p {
+    margin: 0;
+}
+
+.creator-info:hover {
+    opacity: 1;
+} 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>はち歯科医院ガチャガチャ</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="はち歯科医院" class="logo">
+            <h1>Hachi Gacha</h1>
+            <p class="subtitle">素敵なプレゼントが当たるかも！？</p>
+        </header>
+        
+        <main>
+            <div class="gacha-container">
+                <div class="gacha-display">
+                    <div class="gacha-items">
+                        <div class="gacha-item">🎁</div>
+                        <div class="gacha-item">💎</div>
+                        <div class="gacha-item">🌟</div>
+                        <div class="gacha-item">🎉</div>
+                        <div class="gacha-item">💫</div>
+                        <div class="gacha-item">✨</div>
+                        <div class="gacha-item">💝</div>
+                    </div>
+                    <div class="gacha-result" id="gachaResult">
+                        <div class="welcome-message">
+                            <p>はち歯科の診療のご褒美に</p>
+                            <p>ガチャを1回どうぞ！</p>
+                            <p>お楽しみに下さい🎉</p>
+                        </div>
+                        <p class="hint">当たり確率：30%</p>
+                    </div>
+                </div>
+                <button id="gachaButton" class="gacha-button">
+                    <img src="Bunpachi.png" alt="ぶんぱち" class="bunpachi-image">
+                    ガチャを引く
+                </button>
+                <button id="homeButton" class="home-button" aria-label="ホームに戻る">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+    <div class="gif-container">
+        <img src="gacha-animation.svg" alt="ガチャアニメーション">
+    </div>
+    <div class="creator-info">
+        <p>アプリ制作者は塩原小学校2年 白石 亘</p>
+        <p>2025年3月25日納品/春休み自由研究</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
