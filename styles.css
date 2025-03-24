@@ -679,4 +679,123 @@ h1 {
 
 .creator-info:hover {
     opacity: 1;
+}
+
+/* モバイル表示の最適化 */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+    }
+
+    .gacha-container {
+        width: 90vw;
+        height: 108vw; /* 縦の長さを120%に */
+        margin: 10px auto;
+        padding: 10px;
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+
+    .welcome-message {
+        padding: 10px;
+    }
+
+    .welcome-message p {
+        font-size: clamp(0.9em, 4vw, 1.2em);
+        margin: 3px 0;
+    }
+
+    .hint {
+        font-size: clamp(0.7em, 3vw, 0.9em);
+        margin: 5px 0;
+    }
+
+    .logo {
+        max-width: 120px;
+        margin: 5px auto;
+    }
+
+    .gacha-button {
+        width: clamp(108px, 27vw, 144px); /* 150%に拡大 */
+        height: clamp(108px, 27vw, 144px); /* 150%に拡大 */
+        bottom: 10px;
+        margin: 0 auto; /* 中央揃え */
+    }
+
+    .home-button {
+        width: clamp(108px, 27vw, 144px); /* ガチャボタンと同じサイズに */
+        height: clamp(108px, 27vw, 144px); /* ガチャボタンと同じサイズに */
+        bottom: 10px;
+    }
+
+    .home-button svg {
+        width: clamp(30px, 7.5vw, 40px); /* アイコンサイズも調整 */
+        height: clamp(30px, 7.5vw, 40px); /* アイコンサイズも調整 */
+    }
+
+    .gif-container img {
+        width: 90vw;
+        height: 108vw; /* 縦の長さを120%に */
+        max-height: 90vh;
+    }
+}
+
+/* さらに小さい画面サイズの最適化 */
+@media (max-width: 480px) {
+    .container {
+        padding: 3px;
+    }
+
+    .gacha-container {
+        width: 95vw;
+        height: 114vw; /* 縦の長さを120%に */
+        margin: 5px auto;
+        padding: 5px;
+        max-width: 95vw;
+        max-height: 90vh;
+    }
+
+    .welcome-message p {
+        font-size: clamp(0.8em, 3.5vw, 1.1em);
+        margin: 2px 0;
+    }
+
+    .hint {
+        font-size: clamp(0.6em, 2.5vw, 0.8em);
+        margin: 3px 0;
+    }
+
+    .logo {
+        max-width: 100px;
+        margin: 3px auto;
+    }
+
+    .gacha-button {
+        width: clamp(90px, 21.6vw, 126px); /* 150%に拡大 */
+        height: clamp(90px, 21.6vw, 126px); /* 150%に拡大 */
+        bottom: 8px;
+        margin: 0 auto; /* 中央揃え */
+    }
+
+    .home-button {
+        width: clamp(90px, 21.6vw, 126px); /* ガチャボタンと同じサイズに */
+        height: clamp(90px, 21.6vw, 126px); /* ガチャボタンと同じサイズに */
+        bottom: 8px;
+    }
+
+    .home-button svg {
+        width: clamp(25px, 6vw, 35px); /* アイコンサイズも調整 */
+        height: clamp(25px, 6vw, 35px); /* アイコンサイズも調整 */
+    }
+
+    .gif-container img {
+        width: 95vw;
+        height: 114vw; /* 縦の長さを120%に */
+        max-height: 90vh;
+    }
 } 
