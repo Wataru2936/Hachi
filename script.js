@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeButton = document.getElementById('homeButton');
     const gifContainer = document.querySelector('.gif-container');
     const logo = document.querySelector('.logo');
-    const winProbability = 0.3; // 30%の確率で当たり
+    const winProbability = 0.5; // 50%の確率で当たり
 
     // 効果音の設定
     const winSound = new Audio('win.mp3');
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>ガチャを1回どうぞ！</p>
                     <p>Good Luck🎉</p>
                 </div>
-                <p class="hint">当たり確率：30%</p>
+                <p class="hint">当たり確率：50%</p>
             `;
             gachaResult.style.opacity = '1';
         }, 300);
@@ -178,10 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             gachaResult.innerHTML = `
                 <div class="result-reveal">
-                    <p class="result-heading">🎉 おめでとうございます！ 🎉</p>
-                    <p>素敵なプレゼントをお受け取りください！</p>
-                    <p class="win-message">受付でお申し付けください🎁</p>
-                    <p>次回ご来院お待ちしております🦷</p>
+                    <p class="result-heading">🎉 おめでとう！ 🎉</p>
+                    <p>プレゼントがあたったよ！</p>
+                    <p>はちしかにまたきてね🦷</p>
                 </div>
             `;
         } else {
@@ -190,9 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             gachaResult.innerHTML = `
                 <div class="result-reveal">
-                    <p class="result-heading">残念ながらハズレでした...</p>
-                    <p>お疲れ様でした🍵</p>
-                    <p>次回ご来院お待ちしております🦷</p>
+                    <p class="result-heading">ハズレ...</p>
+                    <p>つぎはあたるといいなぁ🎯</p>
+                    <p>はちしかにまたきてね🦷</p>
                 </div>
             `;
         }
