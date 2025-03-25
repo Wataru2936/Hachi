@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="welcome-message">
                     <p>はち歯科の診療のご褒美に</p>
                     <p>ガチャを1回どうぞ！</p>
-                    <p>お楽しみに下さい🎉</p>
+                    <p>Good Luck🎉</p>
                 </div>
                 <p class="hint">当たり確率：30%</p>
             `;
