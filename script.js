@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             gachaResult.innerHTML = `
                 <div class="welcome-message">
-                    <p>はち歯科の診療のご褒美に</p>
+                    <p>がんばったね！</p>
                     <p>ガチャを1回どうぞ！</p>
-                    <p>Good Luck🎉</p>
+                    <p>あたるといいね🎉</p>
                 </div>
-                <p class="hint">当たり確率：50%</p>
+                <p class="hint">あたり：50%</p>
             `;
             gachaResult.style.opacity = '1';
         }, 300);
