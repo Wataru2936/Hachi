@@ -6,14 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeButton = document.getElementById('homeButton');
     const gifContainer = document.querySelector('.gif-container');
     const logo = document.querySelector('.logo');
-    const probabilityDisplay = document.getElementById('probabilityDisplay');
     
     // ローカルストレージから確率を読み込む（デフォルトは50%）
     const winProbability = parseFloat(localStorage.getItem('winProbability')) || 0.5;
 
     // 確率表示を更新する関数
     function updateProbabilityDisplay() {
-        probabilityDisplay.textContent = `${Math.round(winProbability * 100)}%`;
+        const probabilityDisplay = document.getElementById('probabilityDisplay');
+        if (probabilityDisplay) {
+            probabilityDisplay.textContent = `${(winProbability * 10).toFixed(1)}`;
+        }
     }
 
     // 初期表示時に確率を更新
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>ありがとうございます！</p>
                     <p>抽選を1回どうぞ！</p>
                 </div>
-                <!-- <p class="hint">当選確率：<span id="probabilityDisplay">${Math.round(winProbability * 100)}%</span></p> -->
+                <p class="hint">現在アプリver<span id="probabilityDisplay">${(winProbability * 10).toFixed(1)}</span></p>
             `;
             gachaResult.style.opacity = '1';
         }, 300);
