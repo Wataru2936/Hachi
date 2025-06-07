@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // ローカルストレージから確率を読み込む（デフォルトは50%）
     const winProbability = parseFloat(localStorage.getItem('winProbability')) || 0.5;
+    // 初期値が設定されていない場合は50%を設定
+    if (!localStorage.getItem('winProbability')) {
+        localStorage.setItem('winProbability', '0.5');
+    }
 
     // 確率表示を更新する関数
     function updateProbabilityDisplay() {
