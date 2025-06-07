@@ -68,8 +68,8 @@
             font-size: 1.2em;
             color: #333;
         }
-        button {
-            background-color: #4CAF50;
+        .home-button {
+            background-color: #2196F3;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -77,14 +77,7 @@
             cursor: pointer;
             font-size: 16px;
             width: 100%;
-            margin-bottom: 10px;
             transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .home-button {
-            background-color: #2196F3;
         }
         .home-button:hover {
             background-color: #1976D2;
@@ -94,6 +87,11 @@
             padding: 10px;
             border-radius: 4px;
             text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .status.show {
+            opacity: 1;
         }
         .success {
             background-color: #dff0d8;
@@ -157,9 +155,8 @@
                 </label>
             </div>
         </div>
-        <button onclick="saveSettings()">設定を保存</button>
         <button class="home-button" onclick="window.location.href='index.html'">ホームに戻る</button>
-        <div id="status" class="status" style="display: none;"></div>
+        <div id="status" class="status success">設定を保存しました！</div>
     </div>
 
     <script>
@@ -176,7 +173,7 @@
             }
         };
 
-        // ラジオボタンの選択状態を視覚的に反映
+        // ラジオボタンの選択状態を視覚的に反映し、自動保存
         document.querySelectorAll('.probability-option').forEach(option => {
             option.addEventListener('click', function() {
                 // 全ての選択を解除
@@ -185,33 +182,21 @@
                 });
                 // クリックされた要素を選択状態に
                 this.classList.add('selected');
+
+                // 確率を保存
+                const probability = parseInt(this.querySelector('input').value) / 100;
+                localStorage.setItem('winProbability', probability.toString());
+
+                // 保存メッセージを表示
+                const status = document.getElementById('status');
+                status.classList.add('show');
+                
+                // 3秒後にメッセージを非表示
+                setTimeout(() => {
+                    status.classList.remove('show');
+                }, 3000);
             });
         });
-
-        // 設定を保存する
-        function saveSettings() {
-            const selectedOption = document.querySelector('input[name="probability"]:checked');
-            if (!selectedOption) {
-                showStatus('確率を選択してください。', 'error');
-                return;
-            }
-
-            const probability = parseInt(selectedOption.value) / 100;
-            localStorage.setItem('winProbability', probability.toString());
-            showStatus('設定を保存しました！', 'success');
-        }
-
-        // ステータスメッセージを表示
-        function showStatus(message, type) {
-            const status = document.getElementById('status');
-            status.textContent = message;
-            status.className = 'status ' + type;
-            status.style.display = 'block';
-            
-            setTimeout(() => {
-                status.style.display = 'none';
-            }, 3000);
-        }
     </script>
 </body>
 </html> 
