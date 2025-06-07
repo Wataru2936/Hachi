@@ -6,7 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeButton = document.getElementById('homeButton');
     const gifContainer = document.querySelector('.gif-container');
     const logo = document.querySelector('.logo');
-    const winProbability = 0.5; // 50%の確率で当たり
+    const probabilityDisplay = document.getElementById('probabilityDisplay');
+    
+    // ローカルストレージから確率を読み込む（デフォルトは50%）
+    const winProbability = parseFloat(localStorage.getItem('winProbability')) || 0.5;
+
+    // 確率表示を更新する関数
+    function updateProbabilityDisplay() {
+        probabilityDisplay.textContent = `${Math.round(winProbability * 100)}%`;
+    }
+
+    // 初期表示時に確率を更新
+    updateProbabilityDisplay();
 
     // 効果音の設定
     const winSound = new Audio('win.mp3');
@@ -39,11 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             gachaResult.innerHTML = `
                 <div class="welcome-message">
-                    <p>がんばったね！</p>
-                    <p>ガチャを1回どうぞ！</p>
-                    <p>あたるといいね🎉</p>
+                    <p>お越しいただき、</p>
+                    <p>ありがとうございます！</p>
+                    <p>抽選を1回どうぞ！</p>
                 </div>
-                <p class="hint">あたり：50%</p>
+                <p class="hint">当選確率：<span id="probabilityDisplay">${Math.round(winProbability * 100)}%</span></p>
             `;
             gachaResult.style.opacity = '1';
         }, 300);
@@ -178,9 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             gachaResult.innerHTML = `
                 <div class="result-reveal">
-                    <p class="result-heading">🎉 おめでとう！ 🎉</p>
-                    <p>プレゼントがあたったよ！</p>
-                    <p>はちしかにまたきてね🦷</p>
+                    <p class="result-heading">🎉 おめでとうございます！ 🎉</p>
+                    <p>当たりです！</p>
+                    <p>景品をお受け取り下さい🎁</p>
                 </div>
             `;
         } else {
@@ -189,9 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             gachaResult.innerHTML = `
                 <div class="result-reveal">
-                    <p class="result-heading">ハズレ...</p>
-                    <p>つぎはあたるといいなぁ🎯</p>
-                    <p>はちしかにまたきてね🦷</p>
+                    <p class="result-heading">ハズレです...</p>
+                    <p>他にも企画がありますので、</p>
+                    <p>楽しんでいただけますと幸いです🙇</p>
                 </div>
             `;
         }
