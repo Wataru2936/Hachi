@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>ありがとうございます！</p>
                     <p>抽選を1回どうぞ！</p>
                 </div>
-                <p class="hint">当選確率：<span id="probabilityDisplay">${Math.round(winProbability * 100)}%</span></p>
+                <!-- <p class="hint">当選確率：<span id="probabilityDisplay">${Math.round(winProbability * 100)}%</span></p> -->
             `;
             gachaResult.style.opacity = '1';
         }, 300);
